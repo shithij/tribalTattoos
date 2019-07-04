@@ -114,6 +114,28 @@ ul{
   opacity: .8;
   -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 }
+.feedback {
+  background-color : #fb9902;
+  padding: 10px 15px;
+  border-radius: 4px;
+  border-color: #fb9902;
+  height: 5%;
+  text-align: center;
+}
+
+/*.feedback a:hover{
+  background-color : white;
+  color: #fb9902;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border-color: #fb9902;
+}*/
+
+#mybutton {
+  position: fixed;
+  top: 10%;
+  right: 2%;
+}
 /*---------header-area start---------*/
 .header-area{
   position: fixed;
