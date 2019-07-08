@@ -2,6 +2,9 @@ import os
 from flask import Flask, render_template, request, redirect
 import urllib.request
 from flask import g
+# from firebase import firebase
+# import firebase from '../js/firebaseInit'
+# import { firestore } from 'firebase';
 
 salt = "TwinFuries"
 
