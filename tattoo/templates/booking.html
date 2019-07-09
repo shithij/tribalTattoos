@@ -168,11 +168,11 @@
                                 <h2>Book Your Pack</h2>
                                 <p> Book an appointment right now!</p>
                             </div>
-                            <form action="http://localhost:5000/booking" method = "post">
+                            <form  action="/book" method = "post">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-4 col-xs-12">
                                         <p>First Name</p>
-                                        <input type="text" placeholder="First Name">
+                                        <input type="text" placeholder="FullName" name="fName">
                                     </div>
                                     <div class="col-md-6 col-sm-4 col-xs-12">
                                         <p>Artists</p>
@@ -225,6 +225,7 @@
                                     </div>
                                 </div>
                             </form>
+                            {{message}}
                         </div>
                     </div>
                     <div class="col-md-5 col-md-offset-1 hidden-sm hidden-xs">

@@ -31,6 +31,14 @@ def project() :
 def booking() : 
 	return render_template("booking.html")
 
+@app.route("/book",methods=['POST','GET'])
+def book():
+	if request.method== 'POST':
+		name=request.form["fName"]
+		message="asdfghj"
+		return render_template("booking.html", message=message)
+	return render_template("booking.html")
+
 @app.route("/blog")
 def blog() : 
 	return render_template("blog.html")
