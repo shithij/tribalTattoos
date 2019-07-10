@@ -79,9 +79,33 @@ def contact() :
 
 @app.route("/events")
 def events() : 
-	doc_ref = db.collection(u'events')
-	events = doc_ref.get()
-	return render_template("events.html")
+	doc_ref = db.collection(u'events').get()
+	eventList = {}
+	for doc in doc_ref:
+		eventList[doc.id] = doc.to_dict()
+	return render_template("events.html",events=eventList)
+
+@app.route("/register/<event>",methods=['POST','GET'])
+def register(event = None) : 
+	if request.method == 'POST':
+		name = request.form['name']
+		email = request.form['email']
+		phNum = request.form['phNum']
+		dob = request.form['dob']
+		address = request.form['address']
+		# doc_id = email + " " + date
+		col_ref = db.collection(u'events').document(event)
+		doc_ref = col_ref.collection(u'registrations').document(email)
+		doc_ref.set({
+			u'name':name,
+			u'contact':phNum,
+			u'email':email,
+			u'dob':dob,
+			u'address':address
+		})
+		message = "Booking Submitted, Check your mail for confirmation"
+		return render_template("register.html", event=event, message=message)
+	return render_template("register.html", event = event)
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Tribal Tattoos - Blog</title>
+        <title>Tribal Tattoos - Booking</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -57,7 +57,7 @@
                                             <ul id="navigation">
                                                 <li><a href="/">HOME</a>
                                                 </li>
-                                                <li><a href="/services">Service</a>
+                                                <li><a href="/services">Register</a>
                                                 </li>
                                                 <li><a href="#">PAGES</a>
                                                     <ul>
@@ -101,11 +101,12 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="breadcumb-wrap text-center">
-                            <h2>Events</h2>
+                            <h2>REGISTER </h2>
                             <ul>
+                                {{message}} <br>
                                 <li><a href="/">Home</a></li>
                                 <li>/</li>
-                                <li class="active">Events</li>
+                                <li class="active">Register</li>
                             </ul>
                         </div>
                     </div>
@@ -114,57 +115,73 @@
         </div>
         <!-- breadcumb-area end -->
 
-        <!-- blog-area start -->
-        <div class="blog-area bg-1">
+        <!-- about-area start -->
+       
+        <!-- about-area end -->
+        <!-- booknow-area start -->
+        <div class="book-now-area black-opacity bg-img-1">
             <div class="container">
                 <div class="row">
-
-
-
-
-                    
-                    {% for event in events %}
-                    <div class="col-xs-12 col-md-4 col-sm-6">
-                        <div class="blog-wrap">
-                            <div class="blog-img">
-                                <img src="../static/images/blog/2.png" alt="">
+                    <div class="col-md-6 col-xs-12">
+                        <div class="booknow-wrap">
+                            <div class="section-title">
+                                <h2>Register for the event</h2>
                             </div>
-                            <div class="blog-content">
-                                <ul class="blog-meta">
-                                    <li><a href="#"><i class="fa fa-calendar-o"></i> {{events[event]['eventDate']}}</a></li>
-                                    <li><a href="#"><i class="fa fa-clock-o"></i> {{events[event]['eventStartTime']}} to {{events[event]['eventEndTime']}}</a></li>
-                                </ul>
-                                <h3>{{events[event]['eventType']}}</h3>
-                                <p>{{events[event]['eventDesc']}}</p>
-                                <a href="/register/{{event}}">Register <i class="fa fa-long-arrow-right"></i></a>
-                            </div>
+                            <form  action="/register/{{event}}" method = "post">
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-4 col-xs-12">
+                                        <p>Full Name</p>
+                                        <input type="text" placeholder="Full Name" name="name">
+                                    </div>
+                                    <div class="col-md-6 col-sm-4 col-xs-12">
+                                        <p>Event</p>
+                                        <input type="text" placeholder="Event" name="eventName" value="{{event.split(' ')[0]}}">
+                                    </div>
+                                    <div class="col-md-6 col-sm-4 col-xs-12">
+                                        <p>Date</p>                                        
+                                            <input type="Date" name='date' value="{{event.split(' ')[1]}}">                                
+                                    </div>
+                                    <!-- <div class="col-md-6 col-sm-4 col-xs-12">
+                                        <p>Time</p>
+                                        <input type="Text" value="time">
+                                    </div> -->
+                                    <div class="col-md-6 col-sm-4 col-xs-12">
+                                        <p>Email</p>
+                                        <input type="email" placeholder="Your Email" name="email">
+                                    </div>
+                                    
+                                    <div class="col-md-6 col-sm-4 col-xs-12">
+                                        <p>Phone Number</p>                                        
+                                        <input type="text" placeholder="Phone Number" name="phNum">                                 
+                                    </div>
+                                    <div class="col-md-6 col-sm-4 col-xs-12">
+                                        <p>Date of Birth</p>                                        
+                                        <input type="text" placeholder="DOB" name="dob">                                 
+                                    </div>
+                                    <div class="col-md-6 col-sm-4 col-xs-12">
+                                        <p>Address</p>                                        
+                                        <input type="textarea" placeholder="Address" name="address">                                 
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button>Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                            
                         </div>
                     </div>
-                {% endfor %}
-                    
-
-
-
-
-
-                    <div class="col-xs-12">
-                        <div class="pagination-wrap text-center">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-angle-left"></i></a></li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li> <span>3</span></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-                            </ul>
+                    <div class="col-md-5 col-md-offset-1 hidden-sm hidden-xs">
+                        <div class="booknow-img">
+                            <img src="../static/images/img1.png" alt="">
                         </div>
                     </div>
                 </div>
-                <p>No posts as of yet. Stay tuned!</p>
             </div>
         </div>
-        <!-- blog-area end -->
-
+        <!-- booknow-area end -->
+        <!-- .brand-area start -->
+       
+        <!-- .brand-area end -->
         <!-- footer-area start -->
         <footer class="footer-area bg-2">
             <div class="footer-top">
@@ -310,5 +327,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script src="../static/js/plugins.js"></script>
 		<!-- main js -->
         <script src="../static/js/scripts.js"></script>
+        <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCPt0Jkh3hiy1oZIc3YIFxtw5DkYaN7D0Y",
+            authDomain: "tribal-tattoo-ae837.firebaseapp.com",
+            databaseURL: "https://tribal-tattoo-ae837.firebaseio.com",
+            projectId: "tribal-tattoo-ae837",
+            storageBucket: "tribal-tattoo-ae837.appspot.com",
+            messagingSenderId: "699541808921",
+            appId: "1:699541808921:web:63d94d520ccbc351"
+          };
+        </script>
     </body>
 </html>
