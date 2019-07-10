@@ -4,8 +4,11 @@ import urllib.request
 from flask import g
 import firebase_admin
 from firebase_admin import credentials,firestore
+from flask_mail import Mail,Message
 
-cred = credentials.Certificate("tribal-tattoo-ae837-firebase-adminsdk-em2bs-4b95dd3eaf.json")
+
+
+cred = credentials.Certificate("tribal-tattoo-ae837-firebase-adminsdk-em2bs-c5b3a1bd5a.json")
 defaultApp = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
@@ -13,6 +16,13 @@ salt = "TwinFuries"
 
 app=Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'tribaltattoont@gmail.com'
+app.config['MAIL_PASSWORD'] = 'nottribaltattoo'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 @app.route("/")
 def home() : 
@@ -103,6 +113,9 @@ def register(event = None) :
 			u'dob':dob,
 			u'address':address
 		})
+		msg = Message('Registration Confirmation', sender = 'tribaltattoont@gmail.com', recipients = [email])
+		msg.body = "Congratulations, your registration for the event " + event.split(" ")[0] + " on " + event.split(" ")[1] +" has been confirmed"
+		mail.send(msg)
 		message = "Booking Submitted, Check your mail for confirmation"
 		return render_template("register.html", event=event, message=message)
 	return render_template("register.html", event = event)
