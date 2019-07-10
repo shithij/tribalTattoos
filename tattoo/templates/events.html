@@ -125,12 +125,12 @@
                             </div>
                             <div class="blog-content">
                                 <ul class="blog-meta">
-                                    <li><a href="#"><i class="fa fa-clock-o"></i> June, 23, 2017</a></li>
-                                    <li><a href="#"><i class="fa fa-user"></i> Admin</a></li>
-                                    <li><a href="#"><i class="fa fa-comments"></i> 4</a></li>
+                                    <li><a href="#"><i class="fa fa-clock-o"></i>{{selected.eventDate}}</a></li>
+                                    <li><a href="#"><i class="fa fa-user"></i>{{selected.eventStartTime}}</a></li>
+                                    <li><a href="#"><i class="fa fa-comments"></i>{{selected.eventType}}</a></li>
                                 </ul>
-                                <h3>teger eget erat</h3>
-                                <p>Condimentum tincidunt ante. teger eget erat ut mi vehicula dapibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                                <h3>{{selected.eventType}}</h3>
+                                <p>{{selected.eventDesc}}</p>
                                 <a href="blog-details.html">Read More <i class="fa fa-long-arrow-right"></i></a>
                             </div>
                         </div>
@@ -386,6 +386,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
         <script>
             import firebase from "../static/js/firebaseinit"
             import funtions from "../static/js/functions"
+            export default {
+                data() {
+                    return {
+                        selected:{}
+                    }
+                },
+                beforeMount() {
+                    functions.getDocument("events",this,"selected")
+                }
+            }
         </script>
     </body>
 </html>
