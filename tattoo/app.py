@@ -2,6 +2,12 @@ import os
 from flask import Flask, render_template, request, redirect
 import urllib.request
 from flask import g
+import firebase_admin
+from firebase_admin import credentials,firestore
+
+cred = credentials.Certificate("tribal-tattoo-ae837-firebase-adminsdk-em2bs-4b95dd3eaf.json")
+defaultApp = firebase_admin.initialize_app(cred)
+db = firestore.client()
 
 salt = "TwinFuries"
 
@@ -24,8 +30,31 @@ def services() :
 def project() : 
 	return render_template("project.html")
 
-@app.route("/booking")
-def booking() : 
+# @app.route("/booking")
+# def booking() : 
+# 	return render_template("booking.html")
+
+@app.route("/booking",methods=['POST','GET'])
+def booking():
+	if request.method== 'POST':
+		name = request.form['name']
+		artist = request.form['artist']
+		date = request.form['date']
+		time = request.form['time']
+		email = request.form['email']
+		phNum = request.form['phNum']
+		doc_id = email + " " + date
+		doc_ref = db.collection(u'appointments').document(doc_id)
+		doc_ref.set({
+			u'name':name,
+			u'contact':phNum,
+			u'date':date,
+			u'artist':artist,
+			u'time':time,
+			u'email':email
+		})
+		message = "Booking Submitted, Check your mail for confirmation"
+		return render_template("booking.html", message=message)
 	return render_template("booking.html")
 
 @app.route("/blog")
@@ -50,6 +79,8 @@ def contact() :
 
 @app.route("/events")
 def events() : 
+	doc_ref = db.collection(u'events')
+	events = doc_ref.get()
 	return render_template("events.html")
 
 if __name__ == "__main__":
